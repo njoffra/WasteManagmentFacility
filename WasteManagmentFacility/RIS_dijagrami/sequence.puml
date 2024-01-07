@@ -1,0 +1,67 @@
+@startuml
+
+participant WasteManagementPersonnel
+participant Vehicle
+participant StorageFacility
+participant SortingSystem
+participant RecyclingSystem
+participant System
+participant Database
+
+activate System
+System --> Database: Query: Available vehicles
+activate Database
+Database --> Database: Query processing
+deactivate Database
+System --> WasteManagementPersonnel: Response: Available vehicles information
+deactivate System
+
+activate WasteManagementPersonnel
+
+WasteManagementPersonnel -> System: Communication: Access verification system
+activate System
+System --> System: Verification process
+deactivate System
+WasteManagementPersonnel --> System: Response: Verification result
+
+
+WasteManagementPersonnel -> Vehicle: Load waste
+activate Vehicle
+Vehicle --> Vehicle: Transport to facility
+deactivate Vehicle
+
+WasteManagementPersonnel -> StorageFacility: Store waste
+activate StorageFacility
+StorageFacility --> StorageFacility: Update storage status
+deactivate StorageFacility
+
+WasteManagementPersonnel -> SortingSystem: Initiate sorting
+activate SortingSystem
+SortingSystem --> SortingSystem: Sort and separate waste
+deactivate SortingSystem
+
+WasteManagementPersonnel -> StorageFacility: Store sorted waste
+activate StorageFacility
+StorageFacility --> StorageFacility: Update storage status
+deactivate StorageFacility
+
+WasteManagementPersonnel -> RecyclingSystem: Send recyclable waste
+activate RecyclingSystem
+RecyclingSystem --> RecyclingSystem: Process recyclable waste
+deactivate RecyclingSystem
+
+WasteManagementPersonnel -> Vehicle: Load processed waste
+activate Vehicle
+Vehicle --> Vehicle: Transport processed waste
+deactivate Vehicle
+
+WasteManagementPersonnel -> StorageFacility: Store processed waste
+activate StorageFacility
+StorageFacility --> StorageFacility: Update storage status
+deactivate StorageFacility
+
+WasteManagementPersonnel --> System: Notify completion
+System --> Database: Notified Completion
+deactivate WasteManagementPersonnel
+
+@enduml

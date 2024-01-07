@@ -1,0 +1,86 @@
+@startuml
+
+class Administrator {
+  - userID: int
+  - username: string
+  - password: string
+  + authenticateUser(): void
+  + manageSystem(): void
+}
+
+class WasteManagementPersonnel {
+  - employeeID: int
+  - name: string
+  - role: string
+  {abstract} + verifyWaste(): void
+  + assignVehicleRoles(): void
+  + monitorVehicleStatus(): void
+}
+
+class Vehicle {
+  - vehicleID: int
+  - type: string
+  - currentStatus: string
+  + startOperation(): void
+  + updateStatus(): void
+}
+
+class Waste {
+  - wasteID: int
+  - type: string
+  - quantity: int
+  - verificationStatus: string
+  + verifyWaste(): void
+  + processWaste(): void
+}
+
+class StorageFacility {
+  - facilityID: int
+  - capacity: int
+  - currentOccupancy: int
+  + checkOccupancy(): void
+  + updateOccupancy(): void
+}
+
+class UserDatabase {
+  - users: List<User>
+  + addUser(): void
+  + removeUser(): void
+  + getUserByID(): User
+}
+
+class SeniorAdministrator {
+  <<extends>> Administrator
+}
+
+interface WasteVerification {
+  + verifyWaste(): void
+}
+
+class User {
+  // User class details (if needed)
+}
+
+// Associations
+Administrator "1" -- "*" WasteManagementPersonnel: Manages
+WasteManagementPersonnel "1" -- "1" Vehicle: Manipulates
+WasteManagementPersonnel "*" -- "*" Waste: Manages
+Vehicle "*" -- "*" Waste: Transports
+Waste "1" -- "*" StorageFacility: StoredIn
+Administrator "1" -- "1" UserDatabase: Manages
+
+// Inheritance
+SeniorAdministrator --|> Administrator
+
+// Interface Implementation
+WasteManagementPersonnel --|> WasteVerification
+
+// Dependency
+Vehicle --> WasteManagementPersonnel: DependsOn
+
+// System Boundary
+rectangle "System Boundary" {
+  // Contents of the system boundary
+}
+
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+
+!define ENTITY_TABLE class
+!define ENTITY_FIELD field
+
+
+
+ENTITY_TABLE WasteManagementPersonnel {
+  + employeeID: int
+  name: string
+  role: string
+}
+
+ENTITY_TABLE Vehicle {
+  + vehicleID: int
+  type: string
+  currentStatus: string
+}
+
+ENTITY_TABLE Waste {
+  + wasteID: int
+  type: string
+  quantity: int
+  verificationStatus: string
+}
+
+ENTITY_TABLE StorageFacility {
+  + facilityID: int
+  capacity: int
+  currentOccupancy: int
+}
+
+ENTITY_TABLE Administrator {
+  + adminID: int
+  username: string
+  password: string
+}
+
+
+ENTITY_TABLE Personnel_Vehicle {
+  + employeeID: int
+  + vehicleID: int
+}
+
+ENTITY_TABLE Personnel_Waste {
+  + employeeID: int
+  + wasteID: int
+}
+
+ENTITY_TABLE Waste_StorageFacility {
+  + wasteID: int
+  + facilityID: int
+}
+
+
+WasteManagementPersonnel --o{ Personnel_Vehicle : "Operates"
+WasteManagementPersonnel --o{ Personnel_Waste : "Verifies & Manages"
+Waste --o{ Waste_StorageFacility : "Stored In"
+Administrator --o{ WasteManagementPersonnel : "Manages"
+
+@enduml

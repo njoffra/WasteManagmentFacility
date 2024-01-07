@@ -33,6 +33,53 @@ namespace WasteManagmentFacility.Controllers
             return View(users);
         }
 
+        // GET: AdminController/Create
+        public IActionResult Create()
+        {
+            ViewData["Id"] = new SelectList(_userManager.Users, "Id", "Id");
+            return View();
+        }
+
+        // POST: Admin/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id, FirstName,LastName,Email,PhoneNumber")] ApplicationUser scaffold)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    FirstName = scaffold.FirstName,
+                    LastName = scaffold.LastName,
+                    Email = scaffold.Email,
+                    PhoneNumber = scaffold.PhoneNumber,
+                    UserName = scaffold.Email,
+                };
+
+                var result = await _userManager.CreateAsync(user);
+                //if (result.Succeeded)
+                //{
+                //    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                //    var callback = Url.Action(nameof(ResetPassword), "Account", new { token, email = user.Email }, Request.Scheme);
+                //    var message = new Message(new string[] { user.Email }, "Aktivacija profila", $"Da aktivirate profil, <a href='{HtmlEncoder.Default.Encode(callback)}'>kliknite ovdje</a>.");
+                //    await _emailSender.SendEmailAsync(message);
+                //    return RedirectToAction(nameof(Index));
+                //}
+                //else
+                //{
+                //    foreach (var error in result.Errors)
+                //    {
+                //        ModelState.AddModelError("", error.Description);
+                //    }
+            }
+            //}
+
+            ViewData["Id"] = new SelectList(_userManager.Users, "Id", "Id", scaffold.Id);
+            return RedirectToAction(nameof(Index));
+            //return View();
+        }
         // Other methods...
 
         [HttpGet]

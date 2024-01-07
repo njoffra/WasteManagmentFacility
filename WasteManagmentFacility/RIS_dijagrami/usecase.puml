@@ -1,0 +1,41 @@
+@startuml
+
+!define ADMINISTRATOR actor
+!define WASTE_PERSONNEL actor
+!define SYSTEM actor
+
+!define VEHICLE usecase
+!define SORTING usecase
+!define DATABASE usecase
+!define MONITOR usecase
+!define AUTHENTICATION usecase
+!define REPORT_GENERATION usecase
+
+left to right direction
+
+actor Admin
+actor Worker
+actor System
+usecase "User Authentication" as Auth
+usecase "Vehicle Operation" as VehicleOp
+usecase "Sorting and Routing" as Sorting
+usecase "Database Management" as Database
+usecase "Monitor Vehicle Availability" as Monitor
+usecase "Report Generation" as Report
+
+Admin --> Auth
+Worker --> VehicleOp
+Worker --> Sorting
+Admin --> Database
+Worker --> Monitor
+Admin --> Report
+
+VehicleOp --> Sorting : <<include>>
+Database --> Sorting : <<include>>
+Database --> Report : <<include>>
+
+rectangle "System Boundary" {
+    (Waste Management Company Information System)
+}
+
+@enduml

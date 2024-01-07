@@ -1,0 +1,55 @@
+@startuml
+
+package "WasteManagementSystem" {
+  [Administrator]
+  [WasteManagementPersonnel]
+  [WasteVerification]
+  [Vehicle]
+  [Waste]
+  [StorageFacility]
+  [UserDatabase]
+  [SeniorAdministrator]
+}
+
+package "WasteProcessingSubsystem" {
+  [WasteProcessingController]
+  [SortingUnit]
+  [RecyclingUnit]
+  [StorageUnit]
+}
+
+interface "CommunicationInterface" as CommInterface
+
+[User]
+
+
+Administrator -- WasteManagementPersonnel: Manages
+WasteManagementPersonnel -- Vehicle: Manipulates
+WasteManagementPersonnel -- Waste: Manages
+Vehicle -- Waste: Transports
+Waste -- StorageFacility: StoredIn
+Administrator -- UserDatabase: Manages
+
+SeniorAdministrator -- Administrator
+
+WasteManagementPersonnel -- WasteVerification
+
+Vehicle --> WasteManagementPersonnel: DependsOn
+
+
+WasteManagementPersonnel --> WasteProcessingController: Operates
+WasteProcessingController -- SortingUnit: ControlsSorting
+WasteProcessingController -- RecyclingUnit: ControlsRecycling
+WasteProcessingController -- StorageUnit: ControlsStorage
+
+
+WasteProcessingController -- CommInterface: SendsInstructions
+SortingUnit -- CommInterface: SendsSortingStatus
+RecyclingUnit -- CommInterface: SendsRecyclingStatus
+StorageUnit -- CommInterface: SendsStorageStatus
+
+cloud "System Boundary" {
+
+}
+
+@enduml

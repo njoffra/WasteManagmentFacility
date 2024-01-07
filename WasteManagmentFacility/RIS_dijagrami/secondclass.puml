@@ -1,0 +1,81 @@
+@startuml
+
+class Facility {
+  + Id: Guid
+  + Name: string
+  + Capacity: float
+  + CurrentOccupancy: float
+  + Latitude: double
+  + Longitude: double
+  + Vehicles: List<Vehicle>
+
+  + AddVehicle(vehicle: Vehicle): void
+  + RemoveVehicle(vehicleId: Guid): void
+  + UploadFile(file: FileUpload): void
+  + LogAction(action: string, entityName: string, entityId: string): void
+  + PerformVerification(verification: Verification): void
+  + ManageWaste(waste: Waste): void
+}
+
+class FileUpload {
+  + Id: Guid
+  + FileName: string
+  + Content: byte[]
+
+  + Upload(): void
+}
+
+class Logging {
+  + Id: Guid
+  + UserId: string
+  + Action: string
+  + EntityName: string
+  + EntityId: string
+  + Timestamp: DateTime
+
+  + Log(): void
+}
+
+class Vehicle {
+  + Id: Guid
+  + Model: string
+  + Plate: string
+  + Capacity: float
+  + Available: bool
+  + CurrentOccupancy: float
+  + FacilityId: Guid
+
+  + AssignToFacility(facilityId: Guid): void
+}
+
+class Verification {
+  + VerificationId: Guid
+  + IsPlastic: bool
+  + IsMetal: bool
+  + IsPaper: bool
+  + IsWood: bool
+  + IsOrganic: bool
+
+  + Verify(): void
+}
+
+class Waste {
+  + Id: Guid
+  + Quantity: float
+  + IsPlastic: bool?
+  + IsMetal: bool?
+  + IsPaper: bool?
+  + IsWood: bool?
+  + IsOrganic: bool?
+  + VehicleId: Guid
+
+  + Dispose(): void
+}
+
+Facility --|> Vehicle : Contains
+Facility --|> FileUpload : Upload
+Facility --|> Logging : Records
+Facility --|> Verification : Performs
+Facility --|> Waste : Manages
+
+@enduml
