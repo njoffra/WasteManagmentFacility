@@ -11,7 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-WasteManagmentFacility-8918eb01-a605-43ed-b363-7089aaa5c3ae")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WasteManagmentFacility")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

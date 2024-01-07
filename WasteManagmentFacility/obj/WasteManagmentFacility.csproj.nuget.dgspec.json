@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Franjo\\Desktop\\WasteManagmentFacility_RIS\\WasteManagmentFacility\\WasteManagmentFacility.csproj": {}
+    "C:\\Users\\franj\\Desktop\\RIS\\WasteManagmentFacility\\WasteManagmentFacility\\WasteManagmentFacility.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Franjo\\Desktop\\WasteManagmentFacility_RIS\\WasteManagmentFacility\\WasteManagmentFacility.csproj": {
+    "C:\\Users\\franj\\Desktop\\RIS\\WasteManagmentFacility\\WasteManagmentFacility\\WasteManagmentFacility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Franjo\\Desktop\\WasteManagmentFacility_RIS\\WasteManagmentFacility\\WasteManagmentFacility.csproj",
+        "projectUniqueName": "C:\\Users\\franj\\Desktop\\RIS\\WasteManagmentFacility\\WasteManagmentFacility\\WasteManagmentFacility.csproj",
         "projectName": "WasteManagmentFacility",
-        "projectPath": "C:\\Users\\Franjo\\Desktop\\WasteManagmentFacility_RIS\\WasteManagmentFacility\\WasteManagmentFacility.csproj",
-        "packagesPath": "C:\\Users\\Franjo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Franjo\\Desktop\\WasteManagmentFacility_RIS\\WasteManagmentFacility\\obj\\",
+        "projectPath": "C:\\Users\\franj\\Desktop\\RIS\\WasteManagmentFacility\\WasteManagmentFacility\\WasteManagmentFacility.csproj",
+        "packagesPath": "C:\\Users\\franj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\franj\\Desktop\\RIS\\WasteManagmentFacility\\WasteManagmentFacility\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Franjo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\franj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -53,10 +53,6 @@
               "target": "Package",
               "version": "[7.0.14, )"
             },
-            "Microsoft.AspNetCore.Identity.UI": {
-              "target": "Package",
-              "version": "[7.0.14, )"
-            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.14, )"
@@ -89,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
