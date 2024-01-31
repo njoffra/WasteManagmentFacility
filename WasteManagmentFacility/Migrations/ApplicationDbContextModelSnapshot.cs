@@ -389,7 +389,7 @@ namespace WasteManagmentFacility.Migrations
                     b.Property<float>("CurrentOccupancy")
                         .HasColumnType("real");
 
-                    b.Property<Guid>("FacilityId")
+                    b.Property<Guid?>("FacilityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Model")
@@ -501,13 +501,9 @@ namespace WasteManagmentFacility.Migrations
 
             modelBuilder.Entity("WasteManagmentFacility.Models.Vehicle", b =>
                 {
-                    b.HasOne("WasteManagmentFacility.Models.Facility", "Facility")
+                    b.HasOne("WasteManagmentFacility.Models.Facility", null)
                         .WithMany("Vehicles")
-                        .HasForeignKey("FacilityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Facility");
+                        .HasForeignKey("FacilityId");
                 });
 
             modelBuilder.Entity("WasteManagmentFacility.Models.Facility", b =>

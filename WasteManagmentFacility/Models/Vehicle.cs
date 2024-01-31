@@ -9,10 +9,10 @@
         public bool Available { get; set; }
         public float CurrentOccupancy { get; set; }
 
-        // Foreign key for the facility associated with the vehicle
-        public Guid FacilityId { get; set; }
+        ////Foreign key for the facility associated with the vehicle
+        //public Guid FacilityId { get; set; }
 
-        // Navigation property for the facility associated with the vehicle
-        public Facility Facility { get; set; }
+        //// Navigation property for the facility associated with the vehicle
+        //public Facility Facility { get; set; }
     }
 }

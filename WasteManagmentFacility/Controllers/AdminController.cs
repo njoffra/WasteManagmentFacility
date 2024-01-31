@@ -254,7 +254,7 @@ namespace WasteManagmentFacility.Controllers
                     Plate = vehicle.Plate,
                     Capacity = vehicle.Capacity,
                     Available = vehicle.Available,
-                    FacilityId = vehicle.FacilityId
+                    //FacilityId = vehicle.FacilityId
                 };
                 _context.Vehicles.Add(newVehicle);
                 _context.SaveChanges();
