@@ -57,10 +57,10 @@ app.MapControllerRoute(
 //    name: "admin",
 //    pattern: "{controller=Admin}/{action=Index}");
 
-app.MapControllerRoute(
-    name: "admin",
-    pattern: "admin",
-    defaults: new { controller = "Admin", action = "Edit" });
+//app.MapControllerRoute(
+//    name: "admin",
+//    pattern: "admin",
+//    defaults: new { controller = "Admin", action = "Edit" });
 
 //app.MapControllerRoute(
 //    name: "register",

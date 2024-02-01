@@ -18,9 +18,6 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Views\Admin\Facility\" />
-    <Folder Include="Views\Admin\Users\" />
-    <Folder Include="Views\Admin\Vehicle\" />
   </ItemGroup>
 
 </Project>

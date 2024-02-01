@@ -80,7 +80,124 @@ namespace WasteManagmentFacility.Controllers
             return RedirectToAction(nameof(Index));
             //return View();
         }
-        // Other methods...
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("Id, FirstName, LastName, Email, PhoneNumber")] ApplicationUser updatedUser)
+        {
+            if (id != updatedUser.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(id);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                user.FirstName = updatedUser.FirstName;
+                user.LastName = updatedUser.LastName;
+                user.Email = updatedUser.Email;
+                user.PhoneNumber = updatedUser.PhoneNumber;
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View(updatedUser);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View(user);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
 
         [HttpGet]
         public IActionResult CreateFacility()
@@ -141,6 +258,7 @@ namespace WasteManagmentFacility.Controllers
 
         }
         [HttpGet]
+       
         public IActionResult EditFacility(Guid id)
         {
             var facility = _context.Facilities.Find(id);
@@ -155,11 +273,12 @@ namespace WasteManagmentFacility.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditFacility(Guid id, Facility model)
+       
+        public IActionResult EditFacility(Guid id, Facility facilityModel)
         {
             try
             {
-                if (id != model.Id)
+                if (id != facilityModel.Id)
                 {
                     return NotFound();
                 }
@@ -173,9 +292,10 @@ namespace WasteManagmentFacility.Controllers
                         return NotFound();
                     }
 
-                    facility.Name = model.Name;
-                    facility.Capacity = model.Capacity;
-                    facility.Vehicles = model.Vehicles; // Update the VehicleIds
+                    facility.Name = facilityModel.Name;
+
+                    facility.Capacity = facilityModel.Capacity;
+                    facility.Vehicles = facilityModel.Vehicles; // Update the VehicleIds
 
                     _context.SaveChanges();
 
@@ -183,7 +303,7 @@ namespace WasteManagmentFacility.Controllers
                 }
 
                 ViewBag.Vehicles = new SelectList(_context.Vehicles, "Id", "Model");
-                return View(model);
+                return View(facilityModel);
             }
             catch (Exception ex)
             {
@@ -206,7 +326,7 @@ namespace WasteManagmentFacility.Controllers
         }
 
         [HttpPost, ActionName("DeleteFacility")]
-        [ValidateAntiForgeryToken]
+       
         public IActionResult DeleteConfirmedFacility(Guid id)
         {
             try
@@ -228,6 +348,18 @@ namespace WasteManagmentFacility.Controllers
                 _logger.LogError(ex, "An error occurred while deleting the facility.");
                 throw; // Rethrow the exception for further analysis
             }
+        }
+        [HttpGet]
+        public IActionResult DetailsFacility(Guid id)
+        {
+            var facility = _context.Facilities.Find(id);
+
+            if (facility == null)
+            {
+                return NotFound();
+            }
+
+            return View(facility);
         }
 
         [HttpGet]
@@ -266,6 +398,7 @@ namespace WasteManagmentFacility.Controllers
         }
 
         [HttpGet]
+        
         public IActionResult EditVehicle(Guid id)
         {
             var vehicle = _context.Vehicles.Find(id);
@@ -279,11 +412,12 @@ namespace WasteManagmentFacility.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditVehicle(Guid id, Vehicle model)
+       
+        public IActionResult EditVehicle(Guid id, Vehicle vehiclemodel)
         {
             try
             {
-                if (id != model.Id)
+                if (id != vehiclemodel.Id)
                 {
                     return NotFound();
                 }
@@ -297,17 +431,17 @@ namespace WasteManagmentFacility.Controllers
                         return NotFound();
                     }
 
-                    vehicle.Model = model.Model;
-                    vehicle.Plate = model.Plate;
-                    vehicle.Capacity = model.Capacity;
-                    vehicle.Available = model.Available;
+                    vehicle.Model = vehiclemodel.Model;
+                    vehicle.Plate = vehiclemodel.Plate;
+                    vehicle.Capacity = vehiclemodel.Capacity;
+                    vehicle.Available = vehiclemodel.Available;
 
                     _context.SaveChanges();
 
                     return RedirectToAction(nameof(Vehicle));
                 }
 
-                return View(model);
+                return View(vehiclemodel);
             }
             catch (Exception ex)
             {
@@ -353,5 +487,18 @@ namespace WasteManagmentFacility.Controllers
                 throw; // Rethrow the exception for further analysis
             }
         }
+        [HttpGet]
+        public IActionResult DetailsVehicle(Guid id)
+        {
+            var vehicle = _context.Vehicles.Find(id);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            return View(vehicle);
+        }
+
     }
 }
